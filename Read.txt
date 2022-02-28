@@ -1,4 +1,4 @@
-S1.Create Folder P3_ALIB_MASTER and Copy the pickle files below mentioned:senario_RedBestel.pickle
+S1.Download P3_ALIB_MASTER unzip copy to C Drive or Where the project is existing Note: P3_ALIB_MASTER\input contain pickle files. Ex: senario_RedBestel.pickle
 
 S2. In vne.py: 
 a. We can mention reuiremnets of VNRs like minimum and Maximum number of nodes.
