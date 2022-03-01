@@ -1,3 +1,6 @@
+Note: Read and Understand the Virtual network embedding(VNE) problem statement.
+
+
 S1.Download P3_ALIB_MASTER unzip copy to C Drive or Where the project is existing Note: P3_ALIB_MASTER\input contain pickle files. Ex: senario_RedBestel.pickle
 Note: Excluding VtlWavenet2011_KK_ARNER_2.pickle file, all other pickle file conatin Single Substrate Network information but this one contain Two Substrate network information one is KK_Aarnet and other one is VtlWavenet2011 network(WE cann multiple substrate networks), but while uing this we need to establish the connection between two randomely.
 S2. In vne.py: 
