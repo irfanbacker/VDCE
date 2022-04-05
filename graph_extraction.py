@@ -12,6 +12,7 @@ class Extract:
         sys.path.append(os.path.join(os.path.dirname(current), "P3_ALIB_MASTER"))
         current = os.path.join(
             os.path.dirname(current),
+            'VNE_Input',
             "P3_ALIB_MASTER",
             "input",
             "senario_RedBestel.pickle",

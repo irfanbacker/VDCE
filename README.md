@@ -1,4 +1,8 @@
-# VNE_Input
-We can Create most required input pickle file using this packge which contain Physical nework(Substraete network) with finite node and edges and with n number of Virtyal Network Requests with customized minimum and maximum number of nodes with connectivity probability as an input for virtual network embedding problem(VNE)over a Single domain network.
-Note: only one pickle file support for multiple domain network.
-Fore more info follow the readme file.
+# VDCE
+
+Virtual data center embedding problem (ESP-VDCE) using alib-py3.
+
+Build docker image using: `sudo docker build . -t "alib-py3"`\
+Start docker container using: `sudo docker run --privileged -it --mount type=bind,source="$(pwd)",target=/home/vne_input alib-py3`
+
+Note: Add gurobi.lic file (Gurobi web license) in root folder for docker container to work

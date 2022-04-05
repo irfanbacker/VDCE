@@ -28,18 +28,22 @@ class Parameters:
 
 
 class Graph:
-    def __init__(self, nodes, edges, parameters) -> None:
+    def __init__(self, nodes, edges, price, parameters) -> None:
         lower_edge = parameters.lower_edge
         upper_edge = parameters.uppper_edge
         lower_node = parameters.lower_node
         upper_node = parameters.upper_node
         self.nodes = nodes
+        self.price = price
         self.edges = list(edges)
         self.neighbours = dict()
         self.node_weights = dict() # CRB
         self.edge_weights = dict() # BandWidth
         self.node_pos = dict()
         self.delay = dict()
+        self.node_rack = dict()
+        self.edge_group = dict()
+        self.vm_allocated = dict()
         self.parameters = parameters
         for a, b in edges:
             self.edge_weights[(a, b)] = random.randint(lower_edge, upper_edge)
@@ -52,11 +56,20 @@ class Graph:
             l.append(random.randint(parameters.lower_x_pos, parameters.upper_x_pos))
             l.append(random.randint(parameters.lower_y_pos, parameters.upper_y_pos))
             self.node_pos[i] = tuple(l)
+        rack = 0
+        edge_group = 0
         for i in range(self.nodes):
+            self.node_rack[i] = rack # assuming 20 nodes per rack
+            self.edge_group[i] = edge_group # assuming 4 racks in an edge group
+            self.vm_allocated[i] = False # initially all nodes are free
             self.neighbours[i] = set()
             for a, b in self.edges:
                 if int(a) == i:
                     self.neighbours[i].add(b)
+            if i%20 == 0:
+                rack += 1
+            if i%80 == 0:
+                edge_group += 1
 
     def findPaths(self, s, d, visited, path, all_paths, weight):
         visited[int(s)] = True

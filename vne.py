@@ -6,7 +6,7 @@ from graph import Parameters
 
 def create_vne(min_nodes=2, max_nodes=3, no_requests=2, probability=0.4):
     random_node_list = [
-        random.randint(min_nodes, max_nodes) for i in range(no_requests)
+        random.randint(min_nodes, max_nodes) for _ in range(no_requests)
     ]
     new_vne_req = []
     for req in random_node_list:

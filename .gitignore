@@ -1,0 +1,8 @@
+gurobi.lic
+__pycache__
+.vscode
+input.pickle
+graphs.pickle
+DcAllocation.pickle
+VmAllocation.pickle
+LinkAllocation.pickle
