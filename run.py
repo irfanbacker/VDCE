@@ -9,24 +9,29 @@ scenarios = [
     "senario_RedBestel.pickle",
     "senario_HurricaneElectric.pickle",
     "senario_Karen.pickle",
+    "senario_HiberniaUk.pickle",
+    "VtlWavenet2011.pickle"
 ]
-substrates = []
-vne_list = []
-for scenario in scenarios:
-    substrate, vne_req = x.get_graphs(scenario)
-    substrates.append(substrate)
-    vne_list.append(vne_req)
-output = {"substrate": substrates, "vne_list": vne_list}
+energy_prices = [100, 110, 90, 150, 105]
+dcs = []
+vdc_reqs = []
+print()
+print("Reading physical datacenter graphs and")
+print("generating virtual datacenter requests...")
+print()
+for i, scenario in enumerate(scenarios):
+    print("Reading ", scenario)
+    substrate, vne_req = x.get_graphs(
+        scenario, min_nodes=5, max_nodes=15, energy_price=energy_prices[i]
+    )
+    dcs.append(substrate)
+    vdc_reqs.append(vne_req)
+print()
+output = {"substrate": dcs, "vne_list": vdc_reqs}
 pickle_file = open("graphs.pickle", "wb")
 pickle.dump(output, pickle_file)
 
-
 print("Allocating DCs ...")
-with open("graphs.pickle", "rb") as handle:
-    b = pickle.load(handle)
-
-dcs = b.get("substrate")
-vdc_reqs = b.get("vne_list")
 DCAllocator = DCAllocate(dcs, vdc_reqs)
 dc_allocation = DCAllocator.allocate()
 pickle_file = open("DcAllocation.pickle", "wb")
@@ -53,6 +58,8 @@ for j in range(len(vdc_reqs)):
         vl_allocation[j] = VLAllocators[X[j]].allocate(vdc_reqs[j], vm_allocation[j])
     else:
         vl_allocation[j] = {"failure": True}
+pickle_file = open("VlAllocation.pickle", "wb")
+pickle.dump(vl_allocation, pickle_file)
 print("VL Allocation done.")
 
 print()

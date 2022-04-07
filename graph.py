@@ -29,13 +29,14 @@ class Parameters:
 
 
 class Graph:
-    def __init__(self, nodes, edges, price, parameters) -> None:
+    def __init__(self, nodes, edges, energy_price, parameters) -> None:
         lower_edge = parameters.lower_edge
         upper_edge = parameters.uppper_edge
         lower_node = parameters.lower_node
         upper_node = parameters.upper_node
         self.nodes = nodes
-        self.price = price
+        self.energy_price = energy_price
+        self.PUE = random.randint(1,3)
         self.edges = list(edges)
         self.neighbours = dict()
         self.node_weights = dict()  # CRB
@@ -82,7 +83,7 @@ class Graph:
         all_paths = []
         for i in range(self.nodes):
             for j in range(self.nodes):
-                if i!=j:
+                if i != j:
                     paths = []
                     self.findPaths(str(i), str(j), [False] * self.nodes, [], paths, 0)
                     all_paths += paths

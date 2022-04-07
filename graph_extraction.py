@@ -6,12 +6,15 @@ from vne import create_vne
 
 
 class Extract:
-    def get_graphs(self, scenarioFileName="senario_RedBestel.pickle"):
-        current = os.path.dirname(os.path.realpath(__file__))
-        sys.path.append(os.path.join(os.path.dirname(current), "P3_ALIB_MASTER"))
+    def get_graphs(
+        self,
+        scenarioFileName="senario_RedBestel.pickle",
+        min_nodes=3,
+        max_nodes=6,
+        energy_price=100,
+    ):
         current = os.path.join(
-            os.path.dirname(current),
-            "VDCE",
+            os.getcwd(),
             "P3_ALIB_MASTER",
             "input",
             scenarioFileName,
@@ -24,10 +27,10 @@ class Extract:
         substrate = graph.Graph(
             len(data.scenario_list[0].substrate.nodes),
             data.scenario_list[0].substrate.edges,
-            100,
+            energy_price,
             para,
         )
-        vne_req = create_vne(min_nodes=3, max_nodes=6)
+        vne_req = create_vne(min_nodes=min_nodes, max_nodes=max_nodes)
         return substrate, vne_req
 
 
